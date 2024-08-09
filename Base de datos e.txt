@@ -1,0 +1,70 @@
+CREATE DATABASE Ejercito
+    DEFAULT CHARACTER SET = 'utf8mb4';
+
+    use Ejercito;
+
+    CREATE table soldados (
+        Cod_soldado INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Nombre_soldado VARCHAR (15),
+        Apellido_soldado VARCHAR (15),
+        Grado VARCHAR (15)
+    );
+
+    CREATE Table servicios (
+        Cod_servicio INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Acto_servicio VARCHAR (15)
+    );
+
+    
+    CREATE Table soldados_Servicios(
+        Cod_soldado1 INT (5),
+        Cod_servicio1 INT (5)
+    );
+
+
+    CREATE Table cuarteles(
+        Cod_cuarteles INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Nombre_cuartel VARCHAR (15),
+        Ubicacion VARCHAR (15)
+    );
+
+
+    CREATE Table compañia (
+        Num_compañia INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Acto_compañia VARCHAR (15)
+    );
+
+    
+    CREATE table cuarteles_compañias(
+        Cod_cuarteles1 INT (5),
+        Num_compañia1 INT (5)
+    );
+
+    CREATE Table cuerpos_del_ejercito(
+        Cod_cuerpo INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Denominacion VARCHAR (15)
+    );
+
+
+
+alter table soldados_Servicios ADD constraint fk_id2 FOREIGN KEY (Cod_soldado1) REFERENCES soldados (Cod_soldado);
+
+alter table soldados_Servicios ADD constraint fk_id3 FOREIGN KEY (Cod_servicio1) REFERENCES servicios (Cod_servicio);
+
+ALTER Table compañia add Cod_soldadoM INT (5);    
+
+alter table compañia ADD constraint fk_id4 FOREIGN KEY (Cod_soldadoM) REFERENCES soldados (Cod_soldado);
+
+
+alter table cuarteles_compañias ADD constraint fk_id5 FOREIGN KEY (Cod_cuarteles1) REFERENCES cuarteles (Cod_cuarteles);
+
+alter table cuarteles_compañias ADD constraint fk_id6 FOREIGN KEY (Num_compañia1) REFERENCES compañia (Num_compañia);
+
+ALTER Table cuerpos_del_ejercito add Cod_soldadoC INT (5);    
+
+alter table cuerpos_del_ejercito ADD constraint fk_id1 FOREIGN KEY (Cod_soldadoC) REFERENCES soldados (Cod_soldado);
+
+alter table soldados add Cod_cuartelesS int (5);
+
+alter table soldados ADD constraint fk_id7 FOREIGN KEY (Cod_cuartelesS) REFERENCES cuarteles (Cod_cuarteles);
+
